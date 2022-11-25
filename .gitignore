@@ -1,5 +1,6 @@
-.idea
-app_venv_2
-app_venv
-__pycache__
+.idea/
+app_venv_2/
+app_venv/
+__pycache__/
 *.pyc
+media/
