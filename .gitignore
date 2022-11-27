@@ -1,6 +1,10 @@
-.idea/
-app_venv_2/
-app_venv/
-__pycache__/
+# folders
+.idea
+app_venv_2
+__pycache__
+media
+
+# extentions
 *.pyc
-media/
+
+# files

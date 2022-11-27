@@ -1,0 +1,9 @@
+# folders
+__pycache__
+
+# extensions
+*.pyc
+
+# files
+**/local_settings.py
+**/checks.py

@@ -1,0 +1,49 @@
+BASE for any further DEVELOPMENT
+django on docker
+
+2 configurations
+    Dev
+        runs 2 containers: django(django test server) + postgres
+        code folder is 'bind-mounted' into container so server reflects code changes
+        commands:
+            docker-compose -f docker-compose.yml up -d --build
+            docker-compose -f docker-compose.yml exec web python manage.py migrate --noinput
+
+    Prod
+        runs 3 containers: django(gunicorn) + postgres + nginx
+        commands:
+            docker-compose -f docker-compose.prod.yml up -d --build
+            docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput
+            docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear
+
+Небольшой список команд Docker
+Когда вы закончите, не можете погасить контейнер Docker.
+
+docker-compose down
+Просто приостановить контейнер
+
+docker stop CONTAINER ID
+Запустить ранее остановленный контейнер
+
+docker start CONTAINER ID
+Перегрузить контейнер
+
+docker restart CONTAINER ID
+Что бы посмотреть работающие контейнеры
+
+docker ps
+Что бы посмотреть вообще все контейнеры
+
+docker ps -a
+Посмотреть список всех образов
+
+docker images
+Удалить образ
+
+docker rmi CONTAINER ID
+или
+docker rmi -f CONTAINER ID
+Иногда может понадобиться зайти в работающий контейнер. Для этого нужно запустить команду запуска интерактивной оболочкой bash
+
+docker exec -it CONTAINER ID sh
+

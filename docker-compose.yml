@@ -1,6 +1,6 @@
 version: '3.7'
 services:
-  web-dev:
+  web:
     build: ./app
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
@@ -9,15 +9,13 @@ services:
       - 8000:8000
     env_file:
       - ./.env.dev
-#    depends_on:
-#      - db
-#  db:
-#    image: postgres:12.0-alpine
-#    volumes:
-#      - postgres_data:/var/lib/postgresql/data/
-#    environment:
-#      - POSTGRES_USER=hello_django
-#      - POSTGRES_PASSWORD=hello_django
-#      - POSTGRES_DB=hello_django_dev
-#volumes:
-#  postgres_data:
+    depends_on:
+      - db
+  db:
+    image: postgres:12.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./.env.dev.db
+volumes:
+  postgres_data:
