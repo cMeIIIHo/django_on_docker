@@ -5,45 +5,51 @@ django on docker
     Dev
         runs 2 containers: django(django test server) + postgres
         code folder is 'bind-mounted' into container so server reflects code changes
-        commands:
-            docker-compose -f docker-compose.yml up -d --build
-            docker-compose -f docker-compose.yml exec web python manage.py migrate --noinput
+        run:
+            docker-compose up -d --build
+            docker-compose exec web python manage.py migrate --noinput
 
     Prod
         runs 3 containers: django(gunicorn) + postgres + nginx
-        commands:
-            docker-compose -f docker-compose.prod.yml up -d --build
+        build:
+            docker build -f Dockerfile.prod -t cmeiiiho/app .
+        run:
+            docker-compose -f docker-compose.prod.yml pull && docker-compose -f docker-compose.prod.yml up -d
             docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput
             docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear
 
 Небольшой список команд Docker
+
+Логи из запущенный контейнеров
+docker-compose -f docker-compose.prod.yml logs -f
+
 Когда вы закончите, не можете погасить контейнер Docker.
-
 docker-compose down
+
 Просто приостановить контейнер
-
 docker stop CONTAINER ID
+
 Запустить ранее остановленный контейнер
-
 docker start CONTAINER ID
+
 Перегрузить контейнер
-
 docker restart CONTAINER ID
+
 Что бы посмотреть работающие контейнеры
-
 docker ps
+
 Что бы посмотреть вообще все контейнеры
-
 docker ps -a
+
 Посмотреть список всех образов
-
 docker images
-Удалить образ
 
+Удалить образ
 docker rmi CONTAINER ID
+
 или
 docker rmi -f CONTAINER ID
-Иногда может понадобиться зайти в работающий контейнер. Для этого нужно запустить команду запуска интерактивной оболочкой bash
 
+Войти в баш контейнера
 docker exec -it CONTAINER ID sh
 

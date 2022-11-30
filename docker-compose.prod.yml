@@ -1,29 +1,45 @@
 version: '3.7'
 services:
   web:
-    build:
-      context: ./app
-      dockerfile: Dockerfile.prod
+#    build:
+#      context: ./app
+#      dockerfile: Dockerfile.prod
+    image:
+      cmeiiiho/app
     command: gunicorn hello_django.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - static_volume:/home/app/web/static
       - media_volume:/home/app/web/media
     expose:
       - 8000
-    env_file:
-      - ./.env.prod
+    environment:
+      - DEBUG=0
+      - SECRET_KEY=sdfgfjkfhj345354354ttdgrhyoo
+      - POSTGRES_ENGINE=django.db.backends.postgresql
+      - POSTGRES_USER=hello_django
+      - POSTGRES_PASSWORD=hello_django
+      - POSTGRES_DB=hello_django_prod
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
     depends_on:
       - db
   db:
     image: postgres:12.0-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    env_file:
-      - ./.env.prod.db
+    environment:
+      - POSTGRES_ENGINE=django.db.backends.postgresql
+      - POSTGRES_USER=hello_django
+      - POSTGRES_PASSWORD=hello_django
+      - POSTGRES_DB=hello_django_prod
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
     ports:
       - 5432:5432
   nginx:
-    build: ./nginx
+#    build: ./nginx
+    image:
+      cmeiiiho/nginx
     volumes:
       - static_volume:/home/app/web/static
       - media_volume:/home/app/web/media
