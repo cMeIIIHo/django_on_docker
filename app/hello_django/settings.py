@@ -16,7 +16,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -71,11 +70,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'hello_django.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-CSRF_TRUSTED_ORIGINS = ['http://localhost:1337', 'http://127.0.0.1:1337']
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:1337',
+    'http://127.0.0.1:1337',
+    'http://79.98.11.138:5431',
+    'https://79.98.11.138:5431',
+    'http://localhost:5431',
+    'http://127.0.0.1:5431'
+]
 
 DATABASES = {
     "default": {
@@ -87,7 +92,6 @@ DATABASES = {
         "PORT": os.environ.get("POSTGRES_PORT", 5432),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -107,7 +111,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -118,7 +121,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -134,7 +136,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-try:
-    from ...local_settings import *
-except Exception:
-    pass

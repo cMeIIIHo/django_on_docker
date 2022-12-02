@@ -13,7 +13,7 @@ services:
     expose:
       - 8000
     environment:
-      - DEBUG=0
+      - DEBUG=1
       - SECRET_KEY=sdfgfjkfhj345354354ttdgrhyoo
       - POSTGRES_ENGINE=django.db.backends.postgresql
       - POSTGRES_USER=hello_django
