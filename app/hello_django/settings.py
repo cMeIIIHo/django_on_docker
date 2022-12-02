@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'upload',
+    'bash_file_executor',
 ]
 
 MIDDLEWARE = [
@@ -79,12 +79,12 @@ CSRF_TRUSTED_ORIGINS = ['http://localhost:1337', 'http://127.0.0.1:1337']
 
 DATABASES = {
     "default": {
-        "ENGINE": os.environ.get("POSTGRES_ENGINE"),
-        "NAME": os.environ.get("POSTGRES_DB"),
-        "USER": os.environ.get("POSTGRES_USER"),
-        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
-        "HOST": os.environ.get("POSTGRES_HOST"),
-        "PORT": os.environ.get("POSTGRES_PORT"),
+        "ENGINE": os.environ.get("POSTGRES_ENGINE", 'django.db.backends.postgresql'),
+        "NAME": os.environ.get("POSTGRES_DB", 'hello_django_dev'),
+        "USER": os.environ.get("POSTGRES_USER", 'hello_django'),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", 'hello_django'),
+        "HOST": os.environ.get("POSTGRES_HOST", 'localhost'),
+        "PORT": os.environ.get("POSTGRES_PORT", 5432),
     }
 }
 
@@ -135,6 +135,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 try:
-    from .local_settings import *
+    from ...local_settings import *
 except Exception:
     pass

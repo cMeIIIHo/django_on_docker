@@ -6,17 +6,18 @@ django on docker
         runs 2 containers: django(django test server) + postgres
         code folder is 'bind-mounted' into container so server reflects code changes
         run:
-            docker-compose up -d --build
+            docker-compose up -d
             docker-compose exec web python manage.py migrate --noinput
 
     Prod
         runs 3 containers: django(gunicorn) + postgres + nginx
         build:
             docker build -f Dockerfile.prod -t cmeiiiho/app .
+            docker push cmeiiiho/app
         run:
-            docker-compose -f docker-compose.prod.yml pull && docker-compose -f docker-compose.prod.yml up -d
-            docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --noinput
-            docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input --clear
+            docker compose pull && docker compose up -d
+            docker compose exec web python manage.py migrate --noinput
+            docker compose exec web python manage.py collectstatic --no-input --clear
 
 Небольшой список команд Docker
 

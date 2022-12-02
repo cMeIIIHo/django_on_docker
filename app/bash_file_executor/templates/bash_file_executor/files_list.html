@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+{% for f in files %}
+    <a href="{% url 'bash_file_executor:execute_file' f.id %}">{{ f.file.name }}</a>
+{% endfor %}
+
+</body>
+</html>
