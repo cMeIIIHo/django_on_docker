@@ -9,6 +9,9 @@
 {% for f in files %}
     <a href="{% url 'bash_file_executor:execute_file' f.id %}">{{ f.file.name }}</a>
     <br>
+{#    <input type="text" id="params" name="params">#}
+    <br>
+    <br>
 {% endfor %}
 
 </body>
