@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'bash_file_executor',
+    'proxy_equipment',
 ]
 
 MIDDLEWARE = [
