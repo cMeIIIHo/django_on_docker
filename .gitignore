@@ -6,5 +6,6 @@ media
 
 # extentions
 *.pyc
+*.yml
 
 # files
